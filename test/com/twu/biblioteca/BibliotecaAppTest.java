@@ -29,7 +29,8 @@ public class BibliotecaAppTest {
     @Test
     public void listBooks() {
         biblioteca.listBooks();
-        String expectedOutput  = "The Great Gatsby\nMoby Dick\n";
+        String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
+                "Moby Dick | Herman Melville | 1851\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 }
