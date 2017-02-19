@@ -25,4 +25,11 @@ public class BibliotecaAppTest {
         String expectedOutput  = "Hello, welcome to Biblioteca!\n";
         assertEquals(expectedOutput, outContent.toString());
     }
+
+    @Test
+    public void listBooks() {
+        biblioteca.listBooks();
+        String expectedOutput  = "The Great Gatsby\nMoby Dick\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
 }
