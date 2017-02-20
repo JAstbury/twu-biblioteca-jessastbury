@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 import java.util.*;
 
 public class BibliotecaApp {
-    ArrayList<Book> books = new ArrayList<Book>();
+    private ArrayList<Book> books = new ArrayList<Book>();
 
     BibliotecaApp() {
         books.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
@@ -16,11 +16,11 @@ public class BibliotecaApp {
         b.listBooks();
     }
 
-    public void welcomeMessage() {
+    void welcomeMessage() {
         System.out.println("Hello, welcome to Biblioteca!");
     }
 
-    public void listBooks() {
+    void listBooks() {
         for (Book b : books) {
             System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getYear());
         }
