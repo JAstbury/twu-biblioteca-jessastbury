@@ -13,11 +13,21 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp b = new BibliotecaApp();
         b.welcomeMessage();
-        b.listBooks();
+        b.menuDisplay();
     }
 
     void welcomeMessage() {
-        System.out.println("Hello, welcome to Biblioteca!");
+        System.out.println("Hello, welcome to Biblioteca!\n1. List Books");
+    }
+
+    void menuDisplay() {
+        System.out.println("Please choose from these options:");
+        getUserChoice();
+    }
+
+    String getUserChoice() {
+        Scanner user_input = new Scanner( System.in );
+        return user_input.next( );
     }
 
     void listBooks() {
