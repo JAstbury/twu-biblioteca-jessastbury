@@ -1,13 +1,11 @@
 package com.twu.biblioteca;
 
-
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.assertEquals;
 import java.io.*;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
-
 
 public class BibliotecaAppTest {
 
@@ -46,10 +44,19 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void getUserChoice() {
+    public void getsUserChoice() {
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         assertEquals("1", biblioteca.getUserChoice());
     }
+
+//Commented out until I can figure out how to add Mockito to the project.
+//    @Test
+//    public void listsBooksIfUserPicksOne() {
+//        BibliotecaApp bMock = Mockito.spy(new BibliotecaApp());
+//        bMock.selectsMenuOption("1");
+//        verify(bMock, times(1)).listBooks();
+//    }
+
 }

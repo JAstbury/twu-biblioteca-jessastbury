@@ -17,12 +17,13 @@ public class BibliotecaApp {
     }
 
     void welcomeMessage() {
-        System.out.println("Hello, welcome to Biblioteca!\n1. List Books");
+        System.out.println("Hello, welcome to Biblioteca!\n");
     }
 
     void menuDisplay() {
-        System.out.println("Please choose from these options:");
-        getUserChoice();
+        System.out.println("Please choose from these options:\n1. List Books");
+        String choice = getUserChoice();
+        selectsMenuOption(choice);
     }
 
     String getUserChoice() {
@@ -33,6 +34,12 @@ public class BibliotecaApp {
     void listBooks() {
         for (Book b : books) {
             System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getYear());
+        }
+    }
+
+    void selectsMenuOption(String choice) {
+        if (choice.equals("1")) {
+            listBooks();
         }
     }
 
