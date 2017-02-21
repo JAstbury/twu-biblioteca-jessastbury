@@ -59,4 +59,11 @@ public class BibliotecaAppTest {
 //        verify(bMock, times(1)).listBooks();
 //    }
 
+    @Test
+    public void userNotifiedOfInvalidChoice() {
+        biblioteca.selectsMenuOption("T");
+        String expectedOutput  = "Select a valid option!\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
 }

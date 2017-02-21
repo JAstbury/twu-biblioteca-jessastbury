@@ -40,6 +40,8 @@ public class BibliotecaApp {
     void selectsMenuOption(String choice) {
         if (choice.equals("1")) {
             listBooks();
+        } else {
+            System.out.println("Select a valid option!");
         }
     }
 
