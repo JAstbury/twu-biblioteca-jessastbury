@@ -66,4 +66,11 @@ public class BibliotecaAppTest {
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
+    @Test
+    public void exitsIfChoiceIsTwo() {
+        biblioteca.selectsMenuOption("2");
+        String expectedOutput  = "Goodbye!\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
 }
