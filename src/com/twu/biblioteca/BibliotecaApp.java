@@ -23,7 +23,11 @@ public class BibliotecaApp {
     }
 
     void menuDisplay() {
-        System.out.println("Please choose from these options:\n1. List Books\n2. Check Out Book\n3. Exit");
+        System.out.println("Please choose from these options:\n" +
+                "1. List Books\n" +
+                "2. Check Out Book\n" +
+                "3. Return Book\n" +
+                "4. Exit");
         String choice = getUserChoice();
         selectsMenuOption(choice);
     }
@@ -38,9 +42,13 @@ public class BibliotecaApp {
             l.listBooks();
         } else if (choice.equals("2")) {
             System.out.println("What is the title of the book you'd like to check out?");
-            String bookTitle = getUserChoice();
-            l.checkOut(bookTitle);
+            String title = getUserChoice();
+            l.checkOut(title);
         } else if (choice.equals("3")) {
+            System.out.println("What is the title of the book you'd like to return?");
+            String title = getUserChoice();
+            l.returnBook(title);
+        } else if (choice.equals("4")) {
             System.out.println("Goodbye!");
             shouldExit = true;
         } else {

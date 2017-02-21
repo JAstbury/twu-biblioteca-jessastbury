@@ -58,6 +58,13 @@ public class BibliotecaAppTest {
 //        verify(bMock, times(1)).checkOut();
 //    }
 
+    //   @Test
+//    public void callsReturnMethodIfUserPicksTwo() {
+//        BibliotecaApp bMock = Mockito.spy(new BibliotecaApp());
+//        bMock.selectsMenuOption("3");
+//        verify(bMock, times(1)).returnBook();
+//    }
+
     @Test
     public void userNotifiedOfInvalidChoice() {
         biblioteca.selectsMenuOption("T");
@@ -67,7 +74,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void exitsIfChoiceIsTwo() {
-        biblioteca.selectsMenuOption("3");
+        biblioteca.selectsMenuOption("4");
         String expectedOutput  = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
