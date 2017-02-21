@@ -2,8 +2,6 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 import org.junit.Before;
-
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import java.io.*;
 import static org.junit.Assert.assertThat;
@@ -25,14 +23,6 @@ public class BibliotecaAppTest {
         biblioteca.welcomeMessage();
         String expectedOutput  = "Hello, welcome to Biblioteca!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
-    }
-
-    @Test
-    public void listBooks() {
-        biblioteca.listBooks();
-        String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
-                "Moby Dick | Herman Melville | 1851\n";
-        assertEquals(expectedOutput, outContent.toString());
     }
 
     @Test
@@ -81,32 +71,4 @@ public class BibliotecaAppTest {
         String expectedOutput  = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
-
-    @Test
-    public void checkedOutBookIsRemovedFromBooks() {
-        String input = "The Great Gatsby";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        biblioteca.checkOut();
-        biblioteca.listBooks();
-        assertThat(outContent.toString(), not(containsString("The Great Gatsby | F. Scott Fitzgerald | 1925")));
-    }
-
-    @Test
-    public void successMessageWhenUserChecksOutBook() {
-        String input = "The Great Gatsby";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        biblioteca.checkOut();
-        String expectedOutput  = "Thank you! Enjoy the book\n";
-        assertThat(outContent.toString(), containsString(expectedOutput));
-    }
-
-    @Test
-    public void userNotifiedOfUnsuccessfullCheckOut() {
-        String input = "The Great Gasby";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        biblioteca.checkOut();
-        String expectedOutput  = "That book is not available\n";
-        assertThat(outContent.toString(), containsString(expectedOutput));
-    }
-
 }
