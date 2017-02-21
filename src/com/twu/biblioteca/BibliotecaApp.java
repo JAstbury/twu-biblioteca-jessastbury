@@ -38,22 +38,32 @@ public class BibliotecaApp {
     }
 
     void selectsMenuOption(String choice) {
-        if (choice.equals("1")) {
+        if (choice.equals("1"))
             l.listBooks();
-        } else if (choice.equals("2")) {
-            System.out.println("What is the title of the book you'd like to check out?");
-            String title = getUserChoice();
-            l.checkOut(title);
-        } else if (choice.equals("3")) {
-            System.out.println("What is the title of the book you'd like to return?");
-            String title = getUserChoice();
-            l.returnBook(title);
-        } else if (choice.equals("4")) {
-            System.out.println("Goodbye!");
-            shouldExit = true;
-        } else {
+        else if (choice.equals("2"))
+            bookCheckOut();
+        else if (choice.equals("3"))
+            bookReturn()
+        else if (choice.equals("4"))
+            exitProgram();
+        else
             System.out.println("Select a valid option!");
-        }
     }
 
+    private void bookCheckOut() {
+        System.out.println("What is the title of the book you'd like to check out?");
+        String title = getUserChoice();
+        l.checkOut(title);
+    }
+
+    private void bookReturn() {
+        System.out.println("What is the title of the book you'd like to return?");
+        String title = getUserChoice();
+        l.returnBook(title);
+    }
+
+    private void exitProgram() {
+        System.out.println("Goodbye!");
+        shouldExit = true;
+    }
 }
