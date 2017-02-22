@@ -34,14 +34,14 @@ public class LibraryTest {
 
     @Test
     public void checkedOutBookIsRemovedFromAvailableBooks() {
-        l.checkOut("The Great Gatsby");
+        l.checkOut("Moby Dick");
         l.listBooks();
-        assertThat(outContent.toString(), not(containsString("The Great Gatsby | F. Scott Fitzgerald | 1925")));
+        assertThat(outContent.toString(), not(containsString("Moby Dick | Herman Melville | 1851")));
     }
 
     @Test
     public void successMessageWhenUserChecksOutBook() {
-        l.checkOut("The Great Gatsby");
+        l.checkOut("Moby Dick");
         String expectedOutput  = "Thank you! Enjoy the book\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
@@ -54,30 +54,24 @@ public class LibraryTest {
     }
 
     @Test
-    public void ReturnedBookIsRemovedFromUnavailableBooks() {
-        l.checkOut("The Great Gatsby");
+    public void ReturnedBookIsMarkedAsAvailable() {
+        l.checkOut("Moby Dick");
+        l.returnBook("Moby Dick");
         l.listBooks();
-        assertThat(outContent.toString(), not(containsString("The Great Gatsby | F. Scott Fitzgerald | 1925")));
-    }
-
-    @Test
-    public void ReturnedBookIsMovedtoAvailableBooks() {
-        l.checkOut("The Great Gatsby");
-        l.returnBook("The Great Gatsby");
-        l.listBooks();
-        assertThat(outContent.toString(), containsString("The Great Gatsby | F. Scott Fitzgerald | 1925"));
+        assertThat(outContent.toString(), containsString("Moby Dick | Herman Melville | 1851"));
     }
 
     @Test
     public void successMessageWhenUserReturnsBook() {
-        l.checkOut("The Great Gatsby");
-        l.returnBook("The Great Gatsby");
+        l.checkOut("Moby Dick");
+        l.returnBook("Moby Dick");
         String expectedOutput  = "Thank you for returning the book.\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void userNotifiedOfUnsuccessfullReturn() {
+        l.checkOut("The Great Gatsby");
         l.returnBook("The Great Gasby");
         String expectedOutput  = "That is not a valid book to return.\n";
         assertThat(outContent.toString(), containsString(expectedOutput));

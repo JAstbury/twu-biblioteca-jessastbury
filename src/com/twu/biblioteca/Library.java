@@ -6,61 +6,66 @@ import java.util.ArrayList;
  * Created by jessastbury on 21/02/2017.
  */
 public class Library {
-    private ArrayList<Book> availableBooks = new ArrayList<Book>();
-    private ArrayList<Book> unavailableBooks = new ArrayList<Book>();
+    private ArrayList<Book> books = new ArrayList<Book>();
 
     Library() {
-        availableBooks.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
-        availableBooks.add(new Book("Moby Dick", "Herman Melville", 1851));
+        books.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
+        books.add(new Book("Moby Dick", "Herman Melville", 1851));
     }
 
     void listBooks() {
-        for (Book b : availableBooks) {
-            System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getYear());
+        for (Book b : books) {
+            if (b.isAvailable())
+                System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getYear());
         }
     }
 
     void checkOut(String title) {
-        if (checkForBook(title, availableBooks)) {
+        if (canBeCheckedOut(title)) {
             System.out.println("Thank you! Enjoy the book");
-            moveBookToUnavailable(title);
+            processCheckOut(title);
         } else {
             System.out.println("That book is not available");
         }
     }
 
     void returnBook(String title) {
-        if (checkForBook(title, unavailableBooks)) {
+        if (canBeReturned(title)) {
             System.out.println("Thank you for returning the book.");
-            moveBookToAvailable(title);
+            processReturn(title);
         } else {
             System.out.println("That is not a valid book to return.");
         }
     }
 
-    private boolean checkForBook(String title, ArrayList<Book> list) {
-        for (Book b : list) {
-            if (b.getTitle().equals(title))
+    private boolean canBeCheckedOut(String title) {
+        for (Book b : books) {
+            if (b.getTitle().equals(title) && b.isAvailable())
                 return true;
         }
         return false;
     }
 
-    private void moveBookToUnavailable(String title) {
-        for (Book b : availableBooks) {
-            if (b.getTitle().equals(title))
-                availableBooks.remove(b);
-                unavailableBooks.add(b);
-            break;
+    private boolean canBeReturned(String title) {
+        for (Book b : books) {
+            if (b.getTitle().equals(title) && !b.isAvailable())
+            return true;
+        }
+        return false;
+    }
+
+    private void processCheckOut(String title) {
+        for (Book b : books) {
+            if (b.getTitle().equals(title)) {
+                b.markAsUnavailable();
+            }
         }
     }
 
-    private void moveBookToAvailable(String title) {
-        for (Book b : unavailableBooks) {
+    private void processReturn(String title) {
+        for (Book b : books) {
             if (b.getTitle().equals(title))
-                unavailableBooks.remove(b);
-                availableBooks.add(b);
-            break;
+                b.markAsAvailable();
         }
     }
 
