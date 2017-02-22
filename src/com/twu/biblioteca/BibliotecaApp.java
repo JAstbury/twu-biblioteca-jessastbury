@@ -43,7 +43,7 @@ public class BibliotecaApp {
         else if (choice.equals("2"))
             bookCheckOut();
         else if (choice.equals("3"))
-            bookReturn()
+            bookReturn();
         else if (choice.equals("4"))
             exitProgram();
         else

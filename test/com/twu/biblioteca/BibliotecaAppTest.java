@@ -43,27 +43,31 @@ public class BibliotecaAppTest {
         assertEquals("1", biblioteca.getUserChoice());
     }
 
-//Commented out until I can figure out how to add Mockito to the project.
-//    @Test
-//    public void listsBooksIfUserPicksOne() {
-//        BibliotecaApp bMock = Mockito.spy(new BibliotecaApp());
-//        bMock.selectsMenuOption("1");
-//        verify(bMock, times(1)).listBooks();
-//    }
-//
-//   @Test
-//    public void callsCheckoutMethodIfUserPicksTwo() {
-//        BibliotecaApp bMock = Mockito.spy(new BibliotecaApp());
-//        bMock.selectsMenuOption("2");
-//        verify(bMock, times(1)).checkOut();
-//    }
+    @Test
+    public void listsBooksIfUserPicksOne() {
+        biblioteca.selectsMenuOption("1");
+        String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
+                "Moby Dick | Herman Melville | 1851\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
 
-    //   @Test
-//    public void callsReturnMethodIfUserPicksTwo() {
-//        BibliotecaApp bMock = Mockito.spy(new BibliotecaApp());
-//        bMock.selectsMenuOption("3");
-//        verify(bMock, times(1)).returnBook();
-//    }
+   @Test
+    public void callsCheckoutMethodIfUserPicksTwo() {
+       String input = "Moby Dick";
+       System.setIn(new ByteArrayInputStream(input.getBytes()));
+       biblioteca.selectsMenuOption("2");
+       String expectedOutput = "What is the title of the book you'd like to check out?\n";
+       assertThat(outContent.toString(), containsString(expectedOutput));
+   }
+
+    @Test
+    public void callsReturnMethodIfUserPicksThree() {
+        String input = "Moby Dick";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.selectsMenuOption("3");
+        String expectedOutput  = "What is the title of the book you'd like to return?\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
 
     @Test
     public void userNotifiedOfInvalidChoice() {
