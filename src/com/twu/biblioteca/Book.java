@@ -7,6 +7,7 @@ public class Book {
     private String title;
     private String author;
     private int year;
+    private boolean available = true;
 
     Book(String bookTitle, String bookAuthor, int bookYear) {
         title = bookTitle;
@@ -25,4 +26,17 @@ public class Book {
     public int getYear() {
         return year;
     }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void markAsUnavailable() {
+        available = false;
+    }
+
+    public void markAsAvailable() {
+        available = true;
+    }
+
 }

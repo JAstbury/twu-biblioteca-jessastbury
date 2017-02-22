@@ -31,4 +31,22 @@ public class BookTest {
         assertEquals(1925, b.getYear());
     }
 
+    @Test
+    public void startsAsAvailable() {
+        assertEquals(true, b.isAvailable());
+    }
+
+    @Test
+    public void markAsUnavailable() {
+        b.markAsUnavailable();
+        assertEquals(false, b.isAvailable());
+    }
+
+    @Test
+    public void markAsAvailable() {
+        b.markAsUnavailable();
+        b.markAsAvailable();
+        assertEquals(true, b.isAvailable());
+    }
+
 }
