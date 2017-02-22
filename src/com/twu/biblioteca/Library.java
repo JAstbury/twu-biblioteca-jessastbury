@@ -21,7 +21,7 @@ public class Library {
     }
 
     void checkOut(String title) {
-        if (canBeCheckedOut(title)) {
+        if (canBeProcessed(title, true)) {
             System.out.println("Thank you! Enjoy the book");
             processCheckOut(title);
         } else {
@@ -30,7 +30,7 @@ public class Library {
     }
 
     void returnBook(String title) {
-        if (canBeReturned(title)) {
+        if (canBeProcessed(title, false)) {
             System.out.println("Thank you for returning the book.");
             processReturn(title);
         } else {
@@ -38,18 +38,10 @@ public class Library {
         }
     }
 
-    private boolean canBeCheckedOut(String title) {
+    private boolean canBeProcessed(String title, boolean forCheckOut) {
         for (Book b : books) {
-            if (b.getTitle().equals(title) && b.isAvailable())
+            if (b.getTitle().equals(title) && b.isAvailable() == forCheckOut)
                 return true;
-        }
-        return false;
-    }
-
-    private boolean canBeReturned(String title) {
-        for (Book b : books) {
-            if (b.getTitle().equals(title) && !b.isAvailable())
-            return true;
         }
         return false;
     }
