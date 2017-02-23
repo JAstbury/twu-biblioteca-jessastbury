@@ -34,13 +34,13 @@ public class BibliotecaApp {
 
     void selectsMenuOption(String choice) {
         if (choice.equals("1"))
-            l.listBooks();
+            l.listItems(Book.class);
         else if (choice.equals("2"))
-            l.listMovies();
+            l.listItems(Movie.class);
         else if (choice.equals("3"))
-            bookCheckOut();
+            startCheckOut();
         else if (choice.equals("4"))
-            bookReturn();
+            startReturn();
         else if (choice.equals("5"))
             exitProgram();
         else
@@ -56,16 +56,16 @@ public class BibliotecaApp {
                 "5. Exit");
     }
 
-    private void bookCheckOut() {
+    private void startCheckOut() {
         System.out.println("What is the title of the book you'd like to check out?");
         String title = getUserChoice();
-        l.checkOut(title);
+        l.checkOutItem(title);
     }
 
-    private void bookReturn() {
+    private void startReturn() {
         System.out.println("What is the title of the book you'd like to return?");
         String title = getUserChoice();
-        l.returnBook(title);
+        l.returnItem(title);
     }
 
     private void exitProgram() {

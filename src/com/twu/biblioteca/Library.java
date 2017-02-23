@@ -22,27 +22,17 @@ public class Library {
         }
     }
 
-    void listMovies() {
+    void listItems(Class itype) {
         ArrayList<LibraryItem> movies = new ArrayList<LibraryItem>();
         for (LibraryItem i : items) {
-            if (i instanceof Movie) {
+            if (itype.isInstance(i)) {
                 movies.add(i);
             }
         }
         printAvailableItems(movies);
     }
 
-    void listBooks() {
-        ArrayList<LibraryItem> books = new ArrayList<LibraryItem>();
-        for (LibraryItem i : items) {
-            if (i instanceof Book) {
-                books.add(i);
-            }
-        }
-        printAvailableItems(books);
-    }
-
-    void checkOut(String title) {
+    void checkOutItem(String title) {
         if (validCheckOut(title)) {
             System.out.println("Thank you! Enjoy.");
         } else {
@@ -50,7 +40,7 @@ public class Library {
         }
     }
 
-    void returnBook(String title) {
+    void returnItem(String title) {
         if (validReturn(title)) {
             System.out.println("Thank you for returning the item.");
         } else {

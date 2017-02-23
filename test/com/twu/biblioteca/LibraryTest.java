@@ -26,7 +26,7 @@ public class LibraryTest {
 
     @Test
     public void listBooks() {
-        l.listBooks();
+        l.listItems(Book.class);
         String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
                 "Moby Dick | Herman Melville | 1851\n";
         assertEquals(expectedOutput, outContent.toString());
@@ -35,7 +35,7 @@ public class LibraryTest {
 
     @Test
     public void listMovies() {
-        l.listMovies();
+        l.listItems(Movie.class);
         String expectedOutput  = "Pulp Fiction | 1994 | Quentin Tarantino | 9\n" +
                 "Inception | 2010 | Christopher Nolan | 8\n";
         assertEquals(expectedOutput, outContent.toString());
@@ -43,46 +43,46 @@ public class LibraryTest {
 
     @Test
     public void checkedOutBookIsRemovedFromAvailableBooks() {
-        l.checkOut("Moby Dick");
-        l.listBooks();
+        l.checkOutItem("Moby Dick");
+        l.listItems(Book.class);
         assertThat(outContent.toString(), not(containsString("Moby Dick | Herman Melville | 1851")));
     }
 
     @Test
     public void successMessageWhenUserChecksOutBook() {
-        l.checkOut("Moby Dick");
-        String expectedOutput  = "Thank you! Enjoy the book\n";
+        l.checkOutItem("Moby Dick");
+        String expectedOutput  = "Thank you! Enjoy.\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void userNotifiedOfUnsuccessfullCheckOut() {
-        l.checkOut("The Great Gasby");
-        String expectedOutput  = "That book is not available\n";
+        l.checkOutItem("The Great Gasby");
+        String expectedOutput  = "That item is not available\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void ReturnedBookIsMarkedAsAvailable() {
-        l.checkOut("Moby Dick");
-        l.returnBook("Moby Dick");
-        l.listBooks();
+        l.checkOutItem("Moby Dick");
+        l.returnItem("Moby Dick");
+        l.listItems(Book.class);
         assertThat(outContent.toString(), containsString("Moby Dick | Herman Melville | 1851"));
     }
 
     @Test
     public void successMessageWhenUserReturnsBook() {
-        l.checkOut("Moby Dick");
-        l.returnBook("Moby Dick");
-        String expectedOutput  = "Thank you for returning the book.\n";
+        l.checkOutItem("Moby Dick");
+        l.returnItem("Moby Dick");
+        String expectedOutput  = "Thank you for returning the item.\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void userNotifiedOfUnsuccessfullReturn() {
-        l.checkOut("The Great Gatsby");
-        l.returnBook("The Great Gasby");
-        String expectedOutput  = "That is not a valid book to return.\n";
+        l.checkOutItem("The Great Gatsby");
+        l.returnItem("The Great Gasby");
+        String expectedOutput  = "That is not a valid item to return.\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
