@@ -16,7 +16,7 @@ public class Library {
     void listBooks() {
         for (Book b : books) {
             if (b.isAvailable())
-                System.out.println(b.getTitle() + " | " + b.getAuthor() + " | " + b.getYear());
+                System.out.println(b.detailsAsString());
         }
     }
 

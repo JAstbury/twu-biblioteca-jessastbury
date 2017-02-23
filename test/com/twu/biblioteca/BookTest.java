@@ -22,13 +22,8 @@ public class BookTest {
     }
 
     @Test
-    public void bookAuthor() {
-        assertEquals("F. Scott Fitzgerald", b.getAuthor());
-    }
-
-    @Test
-    public void bookYear() {
-        assertEquals(1925, b.getYear());
+    public void detailsAsString() {
+        assertEquals("The Great Gatsby | F. Scott Fitzgerald | 1925", b.detailsAsString());
     }
 
     @Test
