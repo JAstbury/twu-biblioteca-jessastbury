@@ -36,10 +36,12 @@ public class BibliotecaApp {
         if (choice.equals("1"))
             l.listBooks();
         else if (choice.equals("2"))
-            bookCheckOut();
+            l.listMovies();
         else if (choice.equals("3"))
-            bookReturn();
+            bookCheckOut();
         else if (choice.equals("4"))
+            bookReturn();
+        else if (choice.equals("5"))
             exitProgram();
         else
             System.out.println("Select a valid option!");
@@ -48,9 +50,10 @@ public class BibliotecaApp {
     private void printMenu() {
         System.out.println("Please choose from these options:\n" +
                 "1. List Books\n" +
-                "2. Check Out Book\n" +
-                "3. Return Book\n" +
-                "4. Exit");
+                "2. List Movies\n" +
+                "3. Check Out Item\n" +
+                "4. Return Item\n" +
+                "5. Exit");
     }
 
     private void bookCheckOut() {

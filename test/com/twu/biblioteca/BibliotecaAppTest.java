@@ -51,20 +51,28 @@ public class BibliotecaAppTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
+    @Test
+    public void listsMoviesIfUserPicksTwo() {
+        biblioteca.selectsMenuOption("2");
+        String expectedOutput  = "Pulp Fiction | 1994 | Quentin Tarantino | 9\n" +
+                "Inception | 2010 | Christopher Nolan | 8\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
+
    @Test
-    public void callsCheckoutMethodIfUserPicksTwo() {
+    public void callsCheckoutMethodIfUserPicksThree() {
        String input = "Moby Dick";
        System.setIn(new ByteArrayInputStream(input.getBytes()));
-       biblioteca.selectsMenuOption("2");
+       biblioteca.selectsMenuOption("3");
        String expectedOutput = "What is the title of the book you'd like to check out?\n";
        assertThat(outContent.toString(), containsString(expectedOutput));
    }
 
     @Test
-    public void callsReturnMethodIfUserPicksThree() {
+    public void callsReturnMethodIfUserPicksFour() {
         String input = "Moby Dick";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        biblioteca.selectsMenuOption("3");
+        biblioteca.selectsMenuOption("4");
         String expectedOutput  = "What is the title of the book you'd like to return?\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
@@ -77,8 +85,8 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void exitsIfChoiceIsTwo() {
-        biblioteca.selectsMenuOption("4");
+    public void exitsIfChoiceIsFive() {
+        biblioteca.selectsMenuOption("5");
         String expectedOutput  = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }

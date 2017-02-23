@@ -32,6 +32,15 @@ public class LibraryTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
+
+    @Test
+    public void listMovies() {
+        l.listMovies();
+        String expectedOutput  = "Pulp Fiction | 1994 | Quentin Tarantino | 9\n" +
+                "Inception | 2010 | Christopher Nolan | 8\n";
+        assertEquals(expectedOutput, outContent.toString());
+    }
+
     @Test
     public void checkedOutBookIsRemovedFromAvailableBooks() {
         l.checkOut("Moby Dick");
