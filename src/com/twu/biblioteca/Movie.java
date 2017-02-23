@@ -3,21 +3,20 @@ package com.twu.biblioteca;
 /**
  * Created by jessastbury on 23/02/2017.
  */
-public class Movie {
+public class Movie extends LibraryItem {
 
-    private String title;
     private String director;
     private int year;
     private Integer rating;
 
-    Movie(String t, int y, String d, Integer r) {
-        title = t;
+    Movie(String title, int y, String d, Integer r) {
+        super(title);
         year = y;
         director = d;
         rating = r;
     }
 
     public String detailsAsString() {
-        return title + " | " + year + " | " + director + " | " + rating;
+        return getTitle() + " | " + year + " | " + director + " | " + rating;
     }
 }

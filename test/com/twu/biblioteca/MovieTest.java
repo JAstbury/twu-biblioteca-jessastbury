@@ -20,4 +20,33 @@ public class MovieTest {
     public void detailsAsString() {
         assertEquals("Pulp Fiction | 1994 | Quentin Tarantino | 9", m.detailsAsString());
     }
+
+    @Test
+    public void startsAsAvailable() {
+        assertEquals(true, m.isAvailable());
+    }
+
+    @Test
+    public void markAsUnavailable() {
+        m.markAsUnavailable();
+        assertEquals(false, m.isAvailable());
+    }
+
+    @Test
+    public void markAsAvailable() {
+        m.markAsUnavailable();
+        m.markAsAvailable();
+        assertEquals(true, m.isAvailable());
+    }
+
+    @Test
+    public void returnsTrueIfMatchingTitle() {
+        assertEquals(true, m.isMatchingTitle("Pulp Fiction"));
+    }
+
+    @Test
+    public void returnsFalseIfNotMatchingTitle() {
+        assertEquals(false, m.isMatchingTitle("Moby Dick"));
+    }
+
 }
