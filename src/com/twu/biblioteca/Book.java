@@ -15,10 +15,6 @@ public class Book {
         year = bookYear;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public String detailsAsString() {
         return title + " | " + author + " | " + year;
     }

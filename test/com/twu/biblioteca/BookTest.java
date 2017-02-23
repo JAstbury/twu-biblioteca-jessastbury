@@ -17,11 +17,6 @@ public class BookTest {
     }
 
     @Test
-    public void bookTitle() {
-        assertEquals("The Great Gatsby", b.getTitle());
-    }
-
-    @Test
     public void detailsAsString() {
         assertEquals("The Great Gatsby | F. Scott Fitzgerald | 1925", b.detailsAsString());
     }
