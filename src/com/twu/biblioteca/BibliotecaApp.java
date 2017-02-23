@@ -4,7 +4,9 @@ import java.util.*;
 
 public class BibliotecaApp {
     private boolean shouldExit = false;
+    private User currentUser = null;
     Library l = new Library();
+    UserDatabase database = new UserDatabase();
 
     public static void main(String[] args) {
         new BibliotecaApp().go();
@@ -42,6 +44,8 @@ public class BibliotecaApp {
         else if (choice.equals("4"))
             startReturn();
         else if (choice.equals("5"))
+            getLogInDetails();
+        else if (choice.equals("6"))
             exitProgram();
         else
             System.out.println("Select a valid option!");
@@ -53,23 +57,53 @@ public class BibliotecaApp {
                 "2. List Movies\n" +
                 "3. Check Out Item\n" +
                 "4. Return Item\n" +
-                "5. Exit");
+                "5. Log in\n" +
+                "6. Exit");
     }
 
     private void startCheckOut() {
-        System.out.println("What is the title of the book you'd like to check out?");
-        String title = getUserChoice();
-        l.checkOutItem(title);
+        if (isLoggedIn()) {
+            System.out.println("What is the title of the item you'd like to check out?");
+            String title = getUserChoice();
+            l.checkOutItem(title);
+        } else {
+            System.out.println("Please log in.");
+        }
     }
 
     private void startReturn() {
-        System.out.println("What is the title of the book you'd like to return?");
-        String title = getUserChoice();
-        l.returnItem(title);
+        if (isLoggedIn()) {
+            System.out.println("What is the title of the item you'd like to return?");
+            String title = getUserChoice();
+            l.returnItem(title);
+        } else {
+            System.out.println("Please log in.");
+        }
     }
 
     private void exitProgram() {
         System.out.println("Goodbye!");
         shouldExit = true;
+    }
+
+    private boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
+    private void getLogInDetails() {
+        System.out.println("Please enter your username:");
+        String username = getUserChoice();
+        System.out.println("Please enter your password:");
+        String password = getUserChoice();
+        checkInput(username, password);
+    }
+
+    private void checkInput(String username, String password) {
+        currentUser = database.checkCredentials(username, password);
+        if (currentUser == null) {
+            System.out.println("Log in unsuccessful");
+        } else {
+            System.out.println("Log in successful");
+        }
     }
 }

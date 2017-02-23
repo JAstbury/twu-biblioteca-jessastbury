@@ -22,4 +22,14 @@ public class User {
     public String getDetails() {
         return name + " | " + email + " | " + phone;
     }
+
+    public boolean isMatchingUsername(String usernameGiven) {
+        return username.equals(usernameGiven);
+    }
+
+    public boolean isMatchingPassword(String passwordGiven) {
+        return password.equals(passwordGiven);
+    }
+
+
 }
