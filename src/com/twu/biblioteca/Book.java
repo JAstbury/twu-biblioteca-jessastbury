@@ -27,6 +27,10 @@ public class Book {
         return available;
     }
 
+    public boolean isMatchingTitle(String titleGiven) {
+        return title.equals(titleGiven);
+    }
+
     public void markAsUnavailable() {
         available = false;
     }

@@ -40,7 +40,7 @@ public class Library {
 
     private boolean canBeProcessed(String title, boolean forCheckOut) {
         for (Book b : books) {
-            if (b.getTitle().equals(title) && b.isAvailable() == forCheckOut)
+            if (b.isMatchingTitle(title) && b.isAvailable() == forCheckOut)
                 return true;
         }
         return false;
@@ -48,7 +48,7 @@ public class Library {
 
     private void processCheckOut(String title) {
         for (Book b : books) {
-            if (b.getTitle().equals(title)) {
+            if (b.isMatchingTitle(title)) {
                 b.markAsUnavailable();
             }
         }
@@ -56,7 +56,7 @@ public class Library {
 
     private void processReturn(String title) {
         for (Book b : books) {
-            if (b.getTitle().equals(title))
+            if (b.isMatchingTitle(title))
                 b.markAsAvailable();
         }
     }

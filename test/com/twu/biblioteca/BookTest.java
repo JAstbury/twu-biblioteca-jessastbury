@@ -44,4 +44,14 @@ public class BookTest {
         assertEquals(true, b.isAvailable());
     }
 
+    @Test
+    public void returnsTrueIfMatchingTitle() {
+        assertEquals(true, b.isMatchingTitle("The Great Gatsby"));
+    }
+
+    @Test
+    public void returnsFalseIfNotMatchingTitle() {
+        assertEquals(false, b.isMatchingTitle("Moby Dick"));
+    }
+
 }
