@@ -30,7 +30,7 @@ public class BibliotecaAppTest {
         String input = "1";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        biblioteca.menuDisplay();
+        biblioteca.giveMenuOptions();
         String expectedOutput  = "Please choose from these options:\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }

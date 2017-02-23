@@ -7,14 +7,13 @@ public class BibliotecaApp {
     Library l = new Library();
 
     public static void main(String[] args) {
-        BibliotecaApp b = new BibliotecaApp();
-        b.go();
+        new BibliotecaApp().go();
     }
 
     void go() {
         welcomeMessage();
         while (shouldExit == false) {
-            menuDisplay();
+            giveMenuOptions();
         }
     }
 
@@ -22,12 +21,8 @@ public class BibliotecaApp {
         System.out.println("Hello, welcome to Biblioteca!\n");
     }
 
-    void menuDisplay() {
-        System.out.println("Please choose from these options:\n" +
-                "1. List Books\n" +
-                "2. Check Out Book\n" +
-                "3. Return Book\n" +
-                "4. Exit");
+    void giveMenuOptions() {
+        printMenu();
         String choice = getUserChoice();
         selectsMenuOption(choice);
     }
@@ -48,6 +43,14 @@ public class BibliotecaApp {
             exitProgram();
         else
             System.out.println("Select a valid option!");
+    }
+
+    private void printMenu() {
+        System.out.println("Please choose from these options:\n" +
+                "1. List Books\n" +
+                "2. Check Out Book\n" +
+                "3. Return Book\n" +
+                "4. Exit");
     }
 
     private void bookCheckOut() {

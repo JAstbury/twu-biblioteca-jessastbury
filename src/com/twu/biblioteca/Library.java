@@ -21,44 +21,39 @@ public class Library {
     }
 
     void checkOut(String title) {
-        if (canBeProcessed(title, true)) {
+        if (validCheckOut(title)) {
             System.out.println("Thank you! Enjoy the book");
-            processCheckOut(title);
         } else {
             System.out.println("That book is not available");
         }
     }
 
     void returnBook(String title) {
-        if (canBeProcessed(title, false)) {
+        if (validReturn(title)) {
             System.out.println("Thank you for returning the book.");
-            processReturn(title);
         } else {
             System.out.println("That is not a valid book to return.");
         }
     }
 
-    private boolean canBeProcessed(String title, boolean forCheckOut) {
+    private boolean validCheckOut(String title) {
         for (Book b : books) {
-            if (b.isMatchingTitle(title) && b.isAvailable() == forCheckOut)
+            if (b.isMatchingTitle(title) && b.isAvailable()) {
+                b.markAsUnavailable();
                 return true;
+            }
         }
         return false;
     }
 
-    private void processCheckOut(String title) {
+    private boolean validReturn(String title) {
         for (Book b : books) {
-            if (b.isMatchingTitle(title)) {
-                b.markAsUnavailable();
+            if (b.isMatchingTitle(title) && !b.isAvailable()) {
+                b.markAsAvailable();
+                return true;
             }
         }
-    }
-
-    private void processReturn(String title) {
-        for (Book b : books) {
-            if (b.isMatchingTitle(title))
-                b.markAsAvailable();
-        }
+        return false;
     }
 
 }
