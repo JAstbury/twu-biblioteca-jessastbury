@@ -85,8 +85,8 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void exitsIfChoiceIsFive() {
-        biblioteca.selectsMenuOption("6");
+    public void exitsIfChoiceIsSeven() {
+        biblioteca.selectsMenuOption("7");
         String expectedOutput  = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
@@ -102,6 +102,20 @@ public class BibliotecaAppTest {
     public void asksUserToLogInBeforeReturn() {
         biblioteca.selectsMenuOption("4");
         String expectedOutput = "Please log in.\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
+    @Test
+    public void asksUserToLogInBeforePrintingDetails() {
+        biblioteca.selectsMenuOption("6");
+        String expectedOutput = "Please log in.\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
+    @Test
+    public void userCanGetDetails() {
+        biblioteca.selectsMenuOption("6");
+        String expectedOutput = "Bob | BobBobbity123@gmail.com | 07976504329\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 

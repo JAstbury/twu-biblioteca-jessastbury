@@ -46,6 +46,8 @@ public class BibliotecaApp {
         else if (choice.equals("5"))
             getLogInDetails();
         else if (choice.equals("6"))
+            getUserDetails();
+        else if (choice.equals("7"))
             exitProgram();
         else
             System.out.println("Select a valid option!");
@@ -58,7 +60,8 @@ public class BibliotecaApp {
                 "3. Check Out Item\n" +
                 "4. Return Item\n" +
                 "5. Log in\n" +
-                "6. Exit");
+                "6. View your details\n" +
+                "7. Exit");
     }
 
     private void startCheckOut() {
@@ -104,6 +107,14 @@ public class BibliotecaApp {
             System.out.println("Log in unsuccessful");
         } else {
             System.out.println("Log in successful");
+        }
+    }
+
+    private void getUserDetails() {
+        if (isLoggedIn()) {
+            database.printUserDetails(currentUser);
+        } else {
+            System.out.println("Please log in.");
         }
     }
 }

@@ -21,4 +21,8 @@ public class UserDatabase {
         }
         return null;
     }
+
+    public void printUserDetails(User u) {
+        System.out.println(u.getDetails());
+    }
 }
