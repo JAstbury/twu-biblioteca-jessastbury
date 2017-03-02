@@ -1,15 +1,20 @@
 package com.twu.biblioteca;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Created by jessastbury on 02/03/2017.
  */
 public class Biblioteca {
-    private boolean shouldExit = false;
-    private User currentUser = null;
+
+    public boolean shouldExit = false;
+    public User currentUser = null;
     Library l = new Library();
     UserDatabase database = new UserDatabase();
+    private enum Commands { OPTION1, OPTION2, OPTION3, OPTION4, OPTION5, OPTION6, OPTION7 };
+    private static final Map<String, Command> commandMap = new HashMap<String, Command>();
 
     void go() {
         welcomeMessage();
@@ -18,38 +23,30 @@ public class Biblioteca {
         }
     }
 
-    void welcomeMessage() {
+    public void exitApp() {
+        shouldExit = true;
+    }
+
+    private void welcomeMessage() {
         System.out.println("Hello, welcome to Biblioteca!\n");
     }
 
-    void giveMenuOptions() {
+    private void giveMenuOptions() {
         printMenu();
-        String choice = getUserChoice();
-        selectsMenuOption(choice);
+        setUpCommands();
+        executeCommand(getUserChoice());
     }
 
-    String getUserChoice() {
-        Scanner user_input = new Scanner( System.in );
-        return user_input.nextLine();
-    }
-
-    void selectsMenuOption(String choice) {
-        if (choice.equals("1"))
-            l.listItems(Book.class);
-        else if (choice.equals("2"))
-            l.listItems(Movie.class);
-        else if (choice.equals("3"))
-            startCheckOut();
-        else if (choice.equals("4"))
-            startReturn();
-        else if (choice.equals("5"))
-            getLogInDetails();
-        else if (choice.equals("6"))
-            getUserDetails();
-        else if (choice.equals("7"))
-            exitProgram();
-        else
+    private void executeCommand(String s) {
+        String commandName = "OPTION" + s;
+        try {
+            Commands.valueOf(commandName);
+        } catch (IllegalArgumentException ila) {
             System.out.println("Select a valid option!");
+            return;
+        }
+        Command command = commandMap.get(commandName);
+        command.execute();
     }
 
     private void printMenu() {
@@ -63,59 +60,18 @@ public class Biblioteca {
                 "7. Exit");
     }
 
-    private void startCheckOut() {
-        if (isLoggedIn()) {
-            System.out.println("What is the title of the item you'd like to check out?");
-            String title = getUserChoice();
-            l.checkOutItem(title);
-        } else {
-            System.out.println("Please log in.");
-        }
+    private void setUpCommands() {
+        commandMap.put("OPTION1", new ListBooksCommand(l));
+        commandMap.put("OPTION2", new ListMoviesCommand(l));
+        commandMap.put("OPTION3", new CheckOutCommand(l, currentUser));
+        commandMap.put("OPTION4", new ReturnCommand(l, currentUser));
+        commandMap.put("OPTION5", new LogInCommand(this, database));
+        commandMap.put("OPTION6", new UserDetailsCommand(currentUser, database));
+        commandMap.put("OPTION7", new ExitCommand(this));
     }
 
-    private void startReturn() {
-        if (isLoggedIn()) {
-            System.out.println("What is the title of the item you'd like to return?");
-            String title = getUserChoice();
-            l.returnItem(title);
-        } else {
-            System.out.println("Please log in.");
-        }
+    private String getUserChoice() {
+        Scanner user_input = new Scanner( System.in );
+        return user_input.nextLine();
     }
-
-    private void exitProgram() {
-        System.out.println("Goodbye!");
-        shouldExit = true;
-    }
-
-    private boolean isLoggedIn() {
-        return currentUser != null;
-    }
-
-    private void getLogInDetails() {
-        System.out.println("Please enter your username:");
-        String username = getUserChoice();
-        System.out.println("Please enter your password:");
-        String password = getUserChoice();
-        checkInput(username, password);
-    }
-
-    private void checkInput(String username, String password) {
-        currentUser = database.checkCredentials(username, password);
-        if (currentUser == null) {
-            System.out.println("Log in unsuccessful");
-        } else {
-            System.out.println("Log in successful");
-        }
-    }
-
-    private void getUserDetails() {
-        if (isLoggedIn()) {
-            database.printUserDetails(currentUser);
-        } else {
-            System.out.println("Please log in.");
-        }
-    }
-
-
 }
