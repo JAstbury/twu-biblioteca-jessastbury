@@ -7,15 +7,15 @@ import java.io.*;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
 
-public class BibliotecaAppTest {
+public class BibliotecaTest {
 
-    BibliotecaApp biblioteca;
+    Biblioteca biblioteca;
     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
     public void init() {
         System.setOut(new PrintStream(outContent));
-        biblioteca = new BibliotecaApp();
+        biblioteca = new Biblioteca();
     }
 
     @Test
