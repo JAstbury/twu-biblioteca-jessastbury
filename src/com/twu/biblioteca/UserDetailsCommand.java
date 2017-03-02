@@ -5,10 +5,11 @@ package com.twu.biblioteca;
  */
 public class UserDetailsCommand implements Command {
     private User currentUser;
-    UserDatabase database = new UserDatabase();
+    private UserDatabase database;
 
     UserDetailsCommand(User user, UserDatabase database) {
         this.currentUser = user;
+        this.database = database;
     }
 
     public void execute() {
