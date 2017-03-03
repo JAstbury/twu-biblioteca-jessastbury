@@ -3,7 +3,9 @@ package com.twu.biblioteca;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        new Biblioteca().go();
+        Biblioteca b = new Biblioteca();
+        b.welcomeMessage();
+        b.showMenu();
     }
 
 }

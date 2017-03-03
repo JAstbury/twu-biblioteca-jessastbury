@@ -2,9 +2,10 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.assertEquals;
+
 import java.io.*;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.CoreMatchers.containsString;
 
 public class BibliotecaTest {
@@ -19,103 +20,88 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void welcomeMessage() {
+    public void shouldDisplayWelcomeMessage() {
         biblioteca.welcomeMessage();
         String expectedOutput  = "Hello, welcome to Biblioteca!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
-    public void menuDisplay() {
-        String input = "1";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
+    public void exitAppStopsLoopingTheMenu() {
+        biblioteca.exitApp();
+        String expectedOutput  = "Please choose from these options:\n";
+        assertThat(outContent.toString(), not(containsString(expectedOutput)));
+    }
 
+    @Test
+    public void displaysWelcomeMessage() {
+        String input = "9";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         biblioteca.giveMenuOptions();
         String expectedOutput  = "Please choose from these options:\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
-    public void getsUserChoice() {
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        assertEquals("1", biblioteca.getUserChoice());
-    }
-
-    @Test
-    public void listsBooksIfUserPicksOne() {
-        biblioteca.selectsMenuOption("1");
-        String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
-                "Moby Dick | Herman Melville | 1851\n";
-        assertEquals(expectedOutput, outContent.toString());
-    }
-
-    @Test
-    public void listsMoviesIfUserPicksTwo() {
-        biblioteca.selectsMenuOption("2");
-        String expectedOutput  = "Pulp Fiction | 1994 | Quentin Tarantino | 9\n" +
-                "Inception | 2010 | Christopher Nolan | 8\n";
-        assertEquals(expectedOutput, outContent.toString());
-    }
-
-   @Test
-    public void callsCheckoutMethodIfUserPicksThree() {
-       String input = "Moby Dick";
-       System.setIn(new ByteArrayInputStream(input.getBytes()));
-       biblioteca.selectsMenuOption("3");
-       String expectedOutput = "What is the title of the book you'd like to check out?\n";
-       assertThat(outContent.toString(), containsString(expectedOutput));
-   }
-
-    @Test
-    public void callsReturnMethodIfUserPicksFour() {
-        String input = "Moby Dick";
+    public void displaysMenu() {
+        String input = "9";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        biblioteca.selectsMenuOption("4");
-        String expectedOutput  = "What is the title of the book you'd like to return?\n";
+        biblioteca.giveMenuOptions();
+        String expectedOutput  = "Please choose from these options:\n" +
+                "1. List Books\n" +
+                "2. List Movies\n" +
+                "3. Check Out Item\n" +
+                "4. Return Item\n" +
+                "5. Log in\n" +
+                "6. View your details\n" +
+                "7. Exit";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void userNotifiedOfInvalidChoice() {
-        biblioteca.selectsMenuOption("T");
+        String input = "9";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.giveMenuOptions();
         String expectedOutput  = "Select a valid option!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
-    public void exitsIfChoiceIsSeven() {
-        biblioteca.selectsMenuOption("7");
-        String expectedOutput  = "Goodbye!\n";
+    public void listBooksIfUserPicksOne() {
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.giveMenuOptions();
+        String expectedOutput  = "The Great Gatsby | F. Scott Fitzgerald | 1925\n" +
+                "Moby Dick | Herman Melville | 1851\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
+    @Test
+    public void listMoviesIfUserPicksOne() {
+        String input = "2";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.giveMenuOptions();
+        String expectedOutput  = "Pulp Fiction | 1994 | Quentin Tarantino | 9\n" +
+                "Inception | 2010 | Christopher Nolan | 8\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
     public void asksUserToLogInBeforeCheckOut() {
-        biblioteca.selectsMenuOption("3");
+        String input = "3";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         String expectedOutput = "Please log in.\n";
+        biblioteca.giveMenuOptions();
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
     @Test
-    public void asksUserToLogInBeforeReturn() {
-        biblioteca.selectsMenuOption("4");
-        String expectedOutput = "Please log in.\n";
-        assertThat(outContent.toString(), containsString(expectedOutput));
-    }
-
-    @Test
-    public void asksUserToLogInBeforePrintingDetails() {
-        biblioteca.selectsMenuOption("6");
-        String expectedOutput = "Please log in.\n";
-        assertThat(outContent.toString(), containsString(expectedOutput));
-    }
-
-    @Test
-    public void userCanGetDetails() {
-        biblioteca.selectsMenuOption("6");
-        String expectedOutput = "Bob | BobBobbity123@gmail.com | 07976504329\n";
+    public void exitsIfChoiceIsSeven() {
+        String input = "7";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.giveMenuOptions();
+        String expectedOutput = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 

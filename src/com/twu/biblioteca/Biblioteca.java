@@ -11,13 +11,17 @@ public class Biblioteca {
 
     public boolean shouldExit = false;
     public User currentUser = null;
-    Library l = new Library();
+    Library library = new Library();
     UserDatabase database = new UserDatabase();
+
     private enum Commands { OPTION1, OPTION2, OPTION3, OPTION4, OPTION5, OPTION6, OPTION7 };
     private static final Map<String, Command> commandMap = new HashMap<String, Command>();
 
-    void go() {
-        welcomeMessage();
+    public void welcomeMessage() {
+        System.out.println("Hello, welcome to Biblioteca!\n");
+    }
+
+    public void showMenu() {
         while (shouldExit == false) {
             giveMenuOptions();
         }
@@ -27,14 +31,11 @@ public class Biblioteca {
         shouldExit = true;
     }
 
-    private void welcomeMessage() {
-        System.out.println("Hello, welcome to Biblioteca!\n");
-    }
-
-    private void giveMenuOptions() {
+    public void giveMenuOptions() {
         printMenu();
         setUpCommands();
-        executeCommand(getUserChoice());
+        String choice = getUserChoice();
+        executeCommand(choice);
     }
 
     private void executeCommand(String s) {
@@ -61,16 +62,16 @@ public class Biblioteca {
     }
 
     private void setUpCommands() {
-        commandMap.put("OPTION1", new ListBooksCommand(l));
-        commandMap.put("OPTION2", new ListMoviesCommand(l));
-        commandMap.put("OPTION3", new CheckOutCommand(l, currentUser));
-        commandMap.put("OPTION4", new ReturnCommand(l, currentUser));
+        commandMap.put("OPTION1", new ListBooksCommand(library));
+        commandMap.put("OPTION2", new ListMoviesCommand(library));
+        commandMap.put("OPTION3", new CheckOutCommand(library, currentUser));
+        commandMap.put("OPTION4", new ReturnCommand(library, currentUser));
         commandMap.put("OPTION5", new LogInCommand(this, database));
         commandMap.put("OPTION6", new UserDetailsCommand(currentUser, database));
         commandMap.put("OPTION7", new ExitCommand(this));
     }
 
-    private String getUserChoice() {
+    public String getUserChoice() {
         Scanner user_input = new Scanner( System.in );
         return user_input.nextLine();
     }
