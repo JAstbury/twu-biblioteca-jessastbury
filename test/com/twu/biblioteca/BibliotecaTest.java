@@ -108,13 +108,9 @@ public class BibliotecaTest {
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
-    @Before
-    public void signsUserIn() {
-        biblioteca.currentUser = new User("462-9830", "password123", "Bob", "BobBobbity123@gmail.com", "07976504329");
-    }
-
     @Test
     public void returnsUserDetails() {
+        biblioteca.currentUser = new User("462-9830", "password123", "Bob", "BobBobbity123@gmail.com", "07976504329");
         String input = "6";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         String expectedOutput = "Bob | BobBobbity123@gmail.com | 07976504329\n";
