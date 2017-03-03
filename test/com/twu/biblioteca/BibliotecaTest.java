@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.Before;
 
 import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -87,6 +89,16 @@ public class BibliotecaTest {
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
+
+    @Test
+    public void exitsIfChoiceIsSeven() {
+        String input = "7";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        biblioteca.giveMenuOptions();
+        String expectedOutput = "Goodbye!\n";
+        assertThat(outContent.toString(), containsString(expectedOutput));
+    }
+
     @Test
     public void asksUserToLogInBeforeCheckOut() {
         String input = "3";
@@ -96,12 +108,17 @@ public class BibliotecaTest {
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
+    @Before
+    public void signsUserIn() {
+        biblioteca.currentUser = new User("462-9830", "password123", "Bob", "BobBobbity123@gmail.com", "07976504329");
+    }
+
     @Test
-    public void exitsIfChoiceIsSeven() {
-        String input = "7";
+    public void returnsUserDetails() {
+        String input = "6";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
+        String expectedOutput = "Bob | BobBobbity123@gmail.com | 07976504329\n";
         biblioteca.giveMenuOptions();
-        String expectedOutput = "Goodbye!\n";
         assertThat(outContent.toString(), containsString(expectedOutput));
     }
 
