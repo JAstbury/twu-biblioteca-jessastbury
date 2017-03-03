@@ -6,7 +6,7 @@ package com.twu.biblioteca;
 abstract public class LibraryItem {
 
     private String title;
-    private boolean available = true;
+    private boolean checkedIn = true;
 
     LibraryItem(String t) {
         title = t;
@@ -18,20 +18,16 @@ abstract public class LibraryItem {
         return title;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isCheckedIn() {
+        return checkedIn;
     }
 
-    public boolean isMatchingTitle(String titleGiven) {
-        return title.equals(titleGiven);
+    public void markAsCheckedIn() {
+        checkedIn = true;
     }
 
-    public void markAsUnavailable() {
-        available = false;
-    }
-
-    public void markAsAvailable() {
-        available = true;
+    public void markAsCheckedOut() {
+        checkedIn = false;
     }
 
 }

@@ -23,30 +23,20 @@ public class BookTest {
 
     @Test
     public void startsAsAvailable() {
-        assertEquals(true, b.isAvailable());
+        assertEquals(true, b.isCheckedIn());
     }
 
     @Test
     public void markAsUnavailable() {
-        b.markAsUnavailable();
-        assertEquals(false, b.isAvailable());
+        b.markAsCheckedOut();
+        assertEquals(false, b.isCheckedIn());
     }
 
     @Test
     public void markAsAvailable() {
-        b.markAsUnavailable();
-        b.markAsAvailable();
-        assertEquals(true, b.isAvailable());
-    }
-
-    @Test
-    public void returnsTrueIfMatchingTitle() {
-        assertEquals(true, b.isMatchingTitle("The Great Gatsby"));
-    }
-
-    @Test
-    public void returnsFalseIfNotMatchingTitle() {
-        assertEquals(false, b.isMatchingTitle("Moby Dick"));
+        b.markAsCheckedOut();
+        b.markAsCheckedIn();
+        assertEquals(true, b.isCheckedIn());
     }
 
 }

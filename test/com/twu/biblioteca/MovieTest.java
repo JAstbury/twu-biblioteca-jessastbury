@@ -23,30 +23,20 @@ public class MovieTest {
 
     @Test
     public void startsAsAvailable() {
-        assertEquals(true, m.isAvailable());
+        assertEquals(true, m.isCheckedIn());
     }
 
     @Test
     public void markAsUnavailable() {
-        m.markAsUnavailable();
-        assertEquals(false, m.isAvailable());
+        m.markAsCheckedOut();
+        assertEquals(false, m.isCheckedIn());
     }
 
     @Test
     public void markAsAvailable() {
-        m.markAsUnavailable();
-        m.markAsAvailable();
-        assertEquals(true, m.isAvailable());
-    }
-
-    @Test
-    public void returnsTrueIfMatchingTitle() {
-        assertEquals(true, m.isMatchingTitle("Pulp Fiction"));
-    }
-
-    @Test
-    public void returnsFalseIfNotMatchingTitle() {
-        assertEquals(false, m.isMatchingTitle("Moby Dick"));
+        m.markAsCheckedOut();
+        m.markAsCheckedIn();
+        assertEquals(true, m.isCheckedIn());
     }
 
 }

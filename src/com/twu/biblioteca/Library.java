@@ -17,7 +17,7 @@ public class Library {
 
     void printAvailableItems(ArrayList<LibraryItem> itemsToPrint) {
         for (LibraryItem i : itemsToPrint) {
-            if (i.isAvailable())
+            if (i.isCheckedIn())
                 System.out.println(i.detailsAsString());
         }
     }
@@ -50,8 +50,8 @@ public class Library {
 
     private boolean validCheckOut(String title) {
         for (LibraryItem i : items) {
-            if (i.isMatchingTitle(title) && i.isAvailable()) {
-                i.markAsUnavailable();
+            if (isMatchingTitle(i, title) && i.isCheckedIn()) {
+                i.markAsCheckedOut();
                 return true;
             }
         }
@@ -60,12 +60,17 @@ public class Library {
 
     private boolean validReturn(String title) {
         for (LibraryItem i : items) {
-            if (i.isMatchingTitle(title) && !i.isAvailable()) {
-                i.markAsAvailable();
+            if (isMatchingTitle(i, title) && !i.isCheckedIn()) {
+                i.markAsCheckedIn();
                 return true;
             }
         }
         return false;
     }
+
+    private boolean isMatchingTitle(LibraryItem i, String titleGiven) {
+        return i.getTitle().equals(titleGiven);
+    }
+
 
 }
