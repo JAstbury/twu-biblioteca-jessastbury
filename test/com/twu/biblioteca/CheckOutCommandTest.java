@@ -37,7 +37,6 @@ public class CheckOutCommandTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
-
     @Test
     public void asksLibraryToCheckOutIfCurrentUser () {
         String input = "Moby Dick";

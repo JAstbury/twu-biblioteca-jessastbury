@@ -29,7 +29,7 @@ public class CheckOutCommand implements Command {
         return currentUser != null;
     }
 
-    String getUserChoice() {
+    private String getUserChoice() {
         Scanner user_input = new Scanner( System.in );
         return user_input.nextLine();
     }
