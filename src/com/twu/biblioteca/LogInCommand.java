@@ -17,25 +17,21 @@ public class LogInCommand implements Command {
     }
 
     public void execute() {
+        Scanner user_input = new Scanner( System.in );
         System.out.println("Please enter your username:");
-        String username = getUserChoice();
+        String username = user_input.nextLine();;
         System.out.println("Please enter your password:");
-        String password = getUserChoice();
+        String password = user_input.nextLine();
         checkInput(username, password);
     }
 
-    private void checkInput(String username, String password) {
+    public void checkInput(String username, String password) {
         b.currentUser = database.checkCredentials(username, password);
         if (b.currentUser == null) {
             System.out.println("Log in unsuccessful");
         } else {
             System.out.println("Log in successful");
         }
-    }
-
-    private String getUserChoice() {
-        Scanner user_input = new Scanner( System.in );
-        return user_input.nextLine();
     }
 
 }
